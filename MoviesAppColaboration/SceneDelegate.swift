@@ -54,7 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabbarController = UITabBarController()
 
-        let homeVC = UIViewController()
+        let homeVC = HomeCV()
         homeVC.tabBarItem.image = UIImage(systemName: "house.fill")
         
         let profileVC = UIViewController()
