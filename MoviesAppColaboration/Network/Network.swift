@@ -17,8 +17,15 @@ public class Network: NetworkService {
     }
     
     
-    public func request<T>(with request: URL, hanlder: @escaping (Result<T, Error>) -> Void) where T : Decodable {
-        <#code#>
+    public func request<T: Decodable>(with request: URL, hanlder handler: @escaping (Result<T, Error>) -> Void) {
+        self.request(with: request) { (result: Result<Response<T>, Error>) in
+            switch result {
+            case .success(let response):
+                handler(.success(response.data))
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
     }
     
     public func request<T: Decodable>(with request: URL, handler: @escaping (Result<Response<T>, Error>) -> Void) {
@@ -57,7 +64,4 @@ public class Network: NetworkService {
             handler(.success((response: response, data: data)))
         }.resume()
     }
-    
-    
-    
 }
