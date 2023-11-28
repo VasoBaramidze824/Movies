@@ -23,10 +23,7 @@ final class HomeViewModel {
     
     private func fetchMovies() {
         let moviewsURLStirng: String = "https://api.themoviedb.org/3/movie/popular?api_key=2c4048c6f599fb101b867ea41bf01c69"
-        //TODO: Use netwok layer by sandro
-        
-        delegate?.moviesFetched(MoviesResponse.mockMovies)
-        
+                
         Network().request(with: URL(string: moviewsURLStirng)!) { (result: Result<MoviesResponse, Error>) in
             switch result {
             case .success(let success):
