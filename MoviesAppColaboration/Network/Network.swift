@@ -17,7 +17,7 @@ public class Network: NetworkService {
     }
     
     
-    public func request<T: Decodable>(with request: URL, hanlder handler: @escaping (Result<T, Error>) -> Void) {
+    public func request<T: Decodable>(with request: URL, handler: @escaping (Result<T, Error>) -> Void) {
         self.request(with: request) { (result: Result<Response<T>, Error>) in
             switch result {
             case .success(let response):
