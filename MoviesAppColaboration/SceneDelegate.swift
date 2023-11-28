@@ -57,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeVC = UIViewController()
         homeVC.tabBarItem.image = UIImage(systemName: "house.fill")
         
-        let profileVC = UIViewController()
+        let profileVC = ProfileViewController()
         profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
         
         tabbarController.setViewControllers([homeVC, profileVC], animated: true)
