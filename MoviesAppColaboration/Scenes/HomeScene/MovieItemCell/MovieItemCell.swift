@@ -22,4 +22,8 @@ class MovieItemCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configure(with movie: Movie) {
+        movieTitle.text = movie.title
+    }
+    
 }

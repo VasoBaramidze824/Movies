@@ -12,6 +12,7 @@ protocol HomeViewModelDelegate: AnyObject {
 }
 
 final class HomeViewModel {
+    
     private var movies: [Movie]?
     
     weak var delegate: HomeViewModelDelegate?
@@ -20,8 +21,8 @@ final class HomeViewModel {
         fetchMovies()
     }
     
-    private func fetchMovies()-> [Movie] {
+    private func fetchMovies() {
         //TODO: Use netwok layer by sandro
-        return []
+        delegate?.moviesFetched(MoviesResponse.mockMovies)
     }
 }

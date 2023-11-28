@@ -10,7 +10,6 @@ import UIKit
 class HomeCV: UIViewController {
     
     // MARK: - Properties
-    
     private let moviesTableView: UITableView = {
         
         let tableView = UITableView(frame: .zero)
@@ -26,8 +25,8 @@ class HomeCV: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        viewModel.viewDidLoad()
         setupViewModel()
+        viewModel.viewDidLoad()
     }
     
     // MARK: - Private Methods
@@ -45,7 +44,8 @@ class HomeCV: UIViewController {
             moviesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             moviesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        moviesTableView.register(MovieItemCell.self, forCellReuseIdentifier: "MovieItemCell")
+        
+        moviesTableView.register(UINib(nibName: "MovieItemCell", bundle: nil), forCellReuseIdentifier: "MovieItemCell")
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
     }
@@ -59,16 +59,21 @@ class HomeCV: UIViewController {
 extension HomeCV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieItemCell", for: indexPath) as? MovieItemCell
+        cell?.configure(with: movies[indexPath.row])
+        
+        return cell ?? UITableViewCell()
     }
 }
 
 // MARK: - HomeViewModelDelegate
 extension HomeCV: HomeViewModelDelegate {
+    
     func moviesFetched(_ movies: [Movie]) {
         self.movies = movies
         DispatchQueue.main.async {
