@@ -45,7 +45,7 @@ final class ProfileViewController: UIViewController {
         return label
     }()
     
-    private var viewModel: ProfileViewModel = DefaultProfileViewModel()
+    private var viewModel: ProfileViewModel = DefaultProfileViewModel(networkManager: Network())
     
     // MARK: - ViewLifecycle
     override func viewDidLoad() {

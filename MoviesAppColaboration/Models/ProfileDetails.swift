@@ -14,30 +14,7 @@ struct ProfileResponse: Decodable {
 
 // MARK: - Profile
 struct ProfileDetails: Decodable {
-    let id: Int
-    let firstName, lastName: String
-    let age: Int
-    let gender, email, phone: String
-    let address: Address
-    let bio: String
-    let profilePictureURL: String
-    let socialMedia: SocialMedia
-
-    enum CodingKeys: String, CodingKey {
-        case id, firstName, lastName, age, gender, email, phone, address, bio
-        case profilePictureURL = "profilePictureUrl"
-        case socialMedia
-    }
+    let firstName: String?
+    let lastName: String?
+    let bio: String?
 }
-
-// MARK: - Address
-struct Address: Decodable {
-    let street, city, state, country: String
-    let zipCode: String
-}
-
-// MARK: - SocialMedia
-struct SocialMedia: Decodable {
-    let linkedin, twitter, facebook: String
-}
-
