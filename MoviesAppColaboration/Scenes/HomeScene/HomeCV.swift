@@ -20,20 +20,23 @@ class HomeCV: UIViewController {
     }()
     
     private var movies = [Movie]()
-        
+    private let viewModel = HomeViewModel()
+
     // MARK: - ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupUI()
+        viewModel.viewDidLoad()
+        setupViewModel()
     }
     
     // MARK: - Private Methods
-    private func setup() {
+    private func setupUI() {
         view.backgroundColor = UIColor(red: 26/255.0, green: 34/255.0, blue: 50/255.0, alpha: 1)
-        setupCollectionView()
+        setupTableView()
     }
     
-    private func setupCollectionView() {
+    private func setupTableView() {
         view.addSubview(moviesTableView)
         
         NSLayoutConstraint.activate([
@@ -46,8 +49,13 @@ class HomeCV: UIViewController {
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
     }
+    
+    func setupViewModel() {
+        viewModel.delegate = self
+    }
 }
 
+// MARK: - tableView DataSource
 extension HomeCV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,5 +64,15 @@ extension HomeCV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         UITableViewCell()
+    }
+}
+
+// MARK: - HomeViewModelDelegate
+extension HomeCV: HomeViewModelDelegate {
+    func moviesFetched(_ movies: [Movie]) {
+        self.movies = movies
+        DispatchQueue.main.async {
+            self.moviesTableView.reloadData()
+        }
     }
 }
