@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = createTabbarController()
         window?.makeKeyAndVisible()
     }
 
@@ -50,6 +50,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    func createTabbarController() -> UITabBarController {
+        
+        let tabbarController = UITabBarController()
 
+        let homeVC = UIViewController()
+        homeVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        
+        let profileVC = UIViewController()
+        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
+        
+        tabbarController.setViewControllers([homeVC, profileVC], animated: true)
+        tabbarController.tabBar.tintColor = .white
+        
+        return tabbarController
+    }
 }
+
 
